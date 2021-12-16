@@ -206,6 +206,10 @@ img {
     color: var(--first-color);
 }
 
+.nav__logo-img {
+    height: 50px;
+}
+
 @media screen and (max-width: 767px) {
     .nav__menu {
         position: fixed;
