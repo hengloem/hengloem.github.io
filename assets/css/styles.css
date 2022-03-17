@@ -107,7 +107,7 @@ body.dark-theme {
 }
 
 html {
-    scroll-behavior: smoothing;
+    scroll-behavior: smooth;
 }
 
 body {
