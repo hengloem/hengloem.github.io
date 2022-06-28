@@ -1,7 +1,7 @@
-## Responsive Portfolio Website
-Responsive Portfolio Website Using Html, Css and JavaScript, With a beautiful user interface. It contains a Header, Home, About, Skills, Qualification, Services, Portfolio, Project in mind, Testimonial, Contact and Footer.
+## Portfolio Website
+It can be really hard to get your new portfolio website off the ground. But it doesn't have to be. With these simple tips, you can get your website up and running in no time.
 
-### Link Resources
+## Resources
 1. [Icons](https://iconscout.com/unicons)
 2. [Fonts](https://fonts.google.com/)
 3. [GitHub](https://github.com/hengloem)
@@ -10,4 +10,5 @@ Responsive Portfolio Website Using Html, Css and JavaScript, With a beautiful us
 6. [HSL Color](https://www.w3schools.com/colors/colors_hsl.asp)
 7. [Blob Generator](https://www.blobmaker.app/)
 
+## How does it look?
 ![Resume cv](/preview.png)
