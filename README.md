@@ -1,4 +1,4 @@
-# Heng LOEM - Senior Web Developer Portfolio (2025)
+# Heng LOEM - Free Portfolio (2025)
 
 ![Portfolio Preview](/preview-2025.png)
 
@@ -26,7 +26,7 @@ A modern, responsive portfolio website showcasing my skills, experience, and pro
 ## 📁 Project Structure
 
 ```
-portfolio-2025/
+hengloem.github.io/
 ├── index.html
 ├── assets/
 │   ├── css/
@@ -80,12 +80,12 @@ portfolio-2025/
 
 1. **Clone the repository**
    ```bash
-   git clone https://github.com/hengloem/portfolio-2025.git
+   git clone git@github.com:hengloem/hengloem.github.io.git
    ```
 
 2. **Navigate to the project directory**
    ```bash
-   cd portfolio-2025
+   cd hengloem.github.io
    ```
 
 3. **Open in your browser**
@@ -176,20 +176,7 @@ While this is a personal portfolio, suggestions and improvements are welcome! Pl
 
 ---
 
-**Built with ❤️ by Heng LOEM - Senior Web Developer**
+**Built with ❤️ by Heng LOEM**
 
 *Last updated: January 2025*
 ```
-
-## Key Improvements in the 2025 README:
-
-1. **Modern Structure**: Clear, organized sections with emoji icons
-2. **Updated Features**: Highlights 2025-specific features like glassmorphism and dark/light mode
-3. **Technical Details**: Comprehensive tech stack and project structure
-4. **Design System**: Documents color palette, typography, and components
-5. **Development Guide**: Practical customization and development instructions
-6. **Performance Metrics**: Includes Lighthouse scores and performance details
-7. **Professional Presentation**: Polished language and professional tone
-8. **Mobile-First**: Emphasizes responsive design and mobile optimization
-9. **Accessibility**: Highlights WCAG compliance
-10. **Future-Proof**: Ready for 2025 web standards and trends
