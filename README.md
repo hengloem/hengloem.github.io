@@ -1,6 +1,3 @@
-# Updated README for 2025 Portfolio
-
-```markdown
 # Heng LOEM - Senior Web Developer Portfolio (2025)
 
 ![Portfolio Preview](/preview-2025.png)
@@ -196,5 +193,3 @@ While this is a personal portfolio, suggestions and improvements are welcome! Pl
 8. **Mobile-First**: Emphasizes responsive design and mobile optimization
 9. **Accessibility**: Highlights WCAG compliance
 10. **Future-Proof**: Ready for 2025 web standards and trends
-
-The README now better represents the professional quality of the 2025 portfolio and provides comprehensive documentation for both users and developers.
