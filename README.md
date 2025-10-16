@@ -179,4 +179,3 @@ While this is a personal portfolio, suggestions and improvements are welcome! Pl
 **Built with ❤️ by Heng LOEM**
 
 *Last updated: January 2025*
-```
