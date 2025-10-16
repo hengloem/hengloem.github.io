@@ -1,0 +1,23 @@
+<!--?xml version="1.0" encoding="UTF-8"?-->
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title-v">
+  <title id="title-v">tech-vue icon</title>
+  <defs>
+    <linearGradient id="gv" x1="0" x2="1">
+      <stop offset="0" stop-color="#3fb27f"></stop>
+      <stop offset="1" stop-color="#2a9d64"></stop>
+    </linearGradient>
+    <linearGradient id="gv2" x1="0" x2="1">
+      <stop offset="0" stop-color="#2b3a55"></stop>
+      <stop offset="1" stop-color="#203044"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- circular badge -->
+  <circle cx="32" cy="32" r="30" fill="#0F1724"></circle>
+
+  <!-- outer chevron -->
+  <path d="M16,20 L32,44 L48,20 L40,20 L32,30 L24,20 Z" fill="url(#gv)"></path>
+
+  <!-- inner chevron -->
+  <path d="M22,26 L32,38 L42,26 L36,26 L32,31 L28,26 Z" fill="url(#gv2)" opacity="0.95"></path>
+</svg>
