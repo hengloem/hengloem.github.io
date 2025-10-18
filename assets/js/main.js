@@ -1,49 +1,160 @@
-// ==================== MENU SHOW AND HIDDEN ====================
-const navMenu = document.getElementById('nav-menu'),
-    navToggle = document.getElementById('nav-toggle'),
-    navClose = document.getElementById('nav-close')
+document.addEventListener('DOMContentLoaded', function () {
+    const navMenu = document.getElementById('nav-menu');
+    const navToggle = document.getElementById('nav-toggle');
+    const navClose = document.getElementById('nav-close');
+    const navLinks = document.querySelectorAll('.nav__link');
+    const body = document.body;
+    const sections = document.querySelectorAll('section[id]');
 
-/*===== MENU SHOW =====*/
-if (navToggle) {
-    navToggle.addEventListener('click', () => {
-        navMenu.classList.add('show-menu')
-    })
-}
+    /*===== MENU SHOW =====*/
+    if (navToggle) {
+        navToggle.addEventListener('click', () => {
+            body.classList.add('show-menu');
+        });
+    }
 
-/*===== MENU HIDDEN =====*/
-if (navClose) {
-    navClose.addEventListener('click', () => {
-        navMenu.classList.remove('show-menu')
-    })
-}
+    /*===== MENU HIDDEN =====*/
+    function closeMenu() {
+        body.classList.remove('show-menu');
+    }
 
-// ==================== REMOVE MENU MOBILE ====================
-const navLink = document.querySelectorAll('.nav__link')
+    if (navClose) {
+        navClose.addEventListener('click', closeMenu);
+    }
 
-function linkAction() {
-    const navMenu = document.getElementById('nav-menu')
-    navMenu.classList.remove('show-menu')
-}
-navLink.forEach(n => n.addEventListener('click', linkAction))
+    // Close menu when clicking on nav links
+    navLinks.forEach(link => {
+        link.addEventListener('click', closeMenu);
+    });
 
-// ==================== EXPERIENCE TABS ====================
-const experienceTabs = document.querySelectorAll('.experience__tab'),
-    experiencePanels = document.querySelectorAll('.experience__panel')
+    // Close menu when clicking outside
+    document.addEventListener('click', (e) => {
+        if (body.classList.contains('show-menu') &&
+            !navMenu.contains(e.target) &&
+            !e.target.closest('.nav__toggle')) {
+            closeMenu();
+        }
+    });
 
-experienceTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-        const target = tab.getAttribute('data-tab')
+    // Close menu on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape' && body.classList.contains('show-menu')) {
+            closeMenu();
+        }
+    });
 
-        // Remove active class from all tabs and panels
-        experienceTabs.forEach(t => t.classList.remove('active'))
-        experiencePanels.forEach(p => p.classList.remove('active'))
+    // Close menu on resize to desktop
+    window.addEventListener('resize', () => {
+        if (window.innerWidth >= 768) {
+            closeMenu();
+        }
+    });
 
-        // Add active class to clicked tab and corresponding panel
-        tab.classList.add('active')
-        document.getElementById(target).classList.add('active')
-    })
-})
+    // ==================== UPDATE ACTIVE LINK ON SCROLL ====================
+    function scrollActive() {
+        const scrollY = window.pageYOffset;
 
+        sections.forEach(section => {
+            const sectionHeight = section.offsetHeight;
+            const sectionTop = section.offsetTop - 100; // Adjusted offset for header
+            const sectionId = section.getAttribute('id');
+
+            // Check if current scroll position is within this section
+            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
+                // Remove active class from all links
+                navLinks.forEach(link => {
+                    link.classList.remove('active-link');
+                });
+
+                // Add active class to corresponding link
+                const activeLink = document.querySelector(`.nav__link[href*="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active-link');
+                }
+            }
+        });
+
+        // Special handling for home section when at top of page
+        if (scrollY < 100) {
+            navLinks.forEach(link => {
+                link.classList.remove('active-link');
+            });
+            const homeLink = document.querySelector('.nav__link[href*="#home"]');
+            if (homeLink) {
+                homeLink.classList.add('active-link');
+            }
+        }
+    }
+
+    // Throttle scroll events for better performance
+    let scrollTimeout;
+    function throttleScroll() {
+        if (!scrollTimeout) {
+            scrollTimeout = setTimeout(function () {
+                scrollTimeout = null;
+                scrollActive();
+            }, 100);
+        }
+    }
+
+    window.addEventListener('scroll', throttleScroll);
+
+    // ==================== CHANGE BACKGROUND HEADER ====================
+    function scrollHeader() {
+        const header = document.getElementById('header');
+        if (window.scrollY >= 80) {
+            header.classList.add('scroll-header');
+        } else {
+            header.classList.remove('scroll-header');
+        }
+    }
+    window.addEventListener('scroll', scrollHeader);
+
+    // ==================== SHOW SCROLL UP ====================
+    function scrollUp() {
+        const scrollUp = document.getElementById('scroll-top');
+        if (window.scrollY >= 560) {
+            scrollUp.classList.add('show-scroll');
+        } else {
+            scrollUp.classList.remove('show-scroll');
+        }
+    }
+    window.addEventListener('scroll', scrollUp);
+
+    // ==================== SMOOTH SCROLL ====================
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            const href = this.getAttribute('href');
+
+            // Only prevent default for same-page anchors
+            if (href !== '#' && href.startsWith('#')) {
+                e.preventDefault();
+
+                const targetId = href;
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    const headerHeight = document.getElementById('header').offsetHeight;
+                    const targetPosition = targetElement.offsetTop - headerHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+
+    // ==================== INITIAL STATES ====================
+    // Set initial states
+    scrollHeader();
+    scrollUp();
+    scrollActive(); // Set initial active link
+
+    // Force update active state after a short delay to ensure DOM is ready
+    setTimeout(scrollActive, 100);
+});
 // ==================== PORTFOLIO FILTER ====================
 const portfolioFilters = document.querySelectorAll('.portfolio__filter'),
     portfolioItems = document.querySelectorAll('.portfolio__item')
@@ -121,25 +232,45 @@ let swiperTestimonial = new Swiper('.testimonials__container', {
     }
 });
 
-// ==================== SCROLL SECTIONS ACTIVE LINK ====================
-const sections = document.querySelectorAll('section[id]')
-
-function scrollActive() {
-    const scrollY = window.pageYOffset
-
-    sections.forEach(current => {
-        const sectionHeight = current.offsetHeight
-        const sectionTop = current.offsetTop - 100
-        const sectionId = current.getAttribute('id')
-
-        if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.add('active-link')
-        } else {
-            document.querySelector('.nav__menu a[href*=' + sectionId + ']').classList.remove('active-link')
-        }
-    })
+// ==================== SCROLL SECTIONS ACTIVE LINK =============
+function scrollUp() {
+    const scrollUp = document.getElementById('scroll-top');
+    if (this.scrollY >= 560) {
+        scrollUp.classList.add('show-scroll');
+    } else {
+        scrollUp.classList.remove('show-scroll');
+    }
 }
-window.addEventListener('scroll', scrollActive)
+window.addEventListener('scroll', scrollUp);
+
+// ==================== SMOOTH SCROLL TO TOP ====================
+function initScrollToTop() {
+    const scrollTop = document.getElementById('scroll-top');
+
+    if (scrollTop) {
+        scrollTop.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+}
+
+// Initialize scroll to top
+document.addEventListener('DOMContentLoaded', function () {
+    initScrollToTop();
+
+    // Add show-scroll class if page is scrolled on load
+    if (window.scrollY >= 560) {
+        const scrollTop = document.getElementById('scroll-top');
+        if (scrollTop) {
+            scrollTop.classList.add('show-scroll');
+        }
+    }
+});
 
 // ==================== CHANGE BACKGROUND HEADER ====================
 function scrollHeader() {
@@ -441,4 +572,4 @@ function initLoadingAnimation() {
 }
 
 // Uncomment to enable loading animation
-// initLoadingAnimation()
+initLoadingAnimation()

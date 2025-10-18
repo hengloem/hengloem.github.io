@@ -1,90 +1,7 @@
-/*==================== GOOGLE FONTS ====================*/
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap");
-
-/*==================== VARIABLES CSS ====================*/
-:root {
-  /*========== Colors ==========*/
-  --primary-color: #6366f1;
-  --primary-dark: #4f46e5;
-  --primary-light: #818cf8;
-  --secondary-color: #10b981;
-  --accent-color: #f59e0b;
-
-  --text-color: #1f2937;
-  --text-light: #6b7280;
-  --text-lighter: #9ca3af;
-
-  --bg-color: #ffffff;
-  --bg-light: #f9fafb;
-  --bg-dark: #f3f4f6;
-
-  --card-bg: rgba(255, 255, 255, 0.8);
-  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  --card-border: rgba(255, 255, 255, 0.5);
-
-  --gradient-primary: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
-  --gradient-secondary: linear-gradient(135deg, #10b981 0%, #34d399 100%);
-
-  /*========== Font and typography ==========*/
-  --body-font: "Inter", sans-serif;
-  --big-font-size: 3.5rem;
-  --h1-font-size: 2.5rem;
-  --h2-font-size: 2rem;
-  --h3-font-size: 1.5rem;
-  --normal-font-size: 1rem;
-  --small-font-size: 0.875rem;
-  --smaller-font-size: 0.813rem;
-
-  /*========== Font weight ==========*/
-  --font-light: 300;
-  --font-regular: 400;
-  --font-medium: 500;
-  --font-semi-bold: 600;
-  --font-bold: 700;
-
-  /*========== Margins ==========*/
-  --mb-0-5: 0.5rem;
-  --mb-0-75: 0.75rem;
-  --mb-1: 1rem;
-  --mb-1-5: 1.5rem;
-  --mb-2: 2rem;
-  --mb-2-5: 2.5rem;
-  --mb-3: 3rem;
-
-  /*========== z index ==========*/
-  --z-tooltip: 10;
-  --z-fixed: 100;
-  --z-modal: 1000;
-
-  /*========== Border radius ==========*/
-  --border-radius: 12px;
-  --border-radius-lg: 20px;
-
-  /*========== Transition ==========*/
-  --transition: all 0.3s ease;
-}
-
-/*========== Dark theme variables ==========*/
-body.dark-theme {
-  --text-color: #f9fafb;
-  --text-light: #d1d5db;
-  --text-lighter: #9ca3af;
-
-  --bg-color: #111827;
-  --bg-light: #1f2937;
-  --bg-dark: #374151;
-
-  --card-bg: rgba(30, 41, 59, 0.7);
-  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.2);
-  --card-border: rgba(55, 65, 81, 0.5);
-}
-
-/*==================== BASE ====================*/
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
-}
+@import url("./variable.css");
+@import url("./dark-theme.css");
+@import url("./base.css");
 
 html {
   scroll-behavior: smooth;
@@ -239,7 +156,6 @@ button {
   top: 0;
   left: 0;
   width: 100%;
-  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
   z-index: var(--z-fixed);
   transition: var(--transition);
@@ -283,27 +199,27 @@ button {
   -webkit-text-fill-color: transparent;
 }
 
+/* MOBILE NAVIGATION */
 .nav__menu {
   position: fixed;
   top: -100%;
   left: 0;
   width: 100%;
-  padding: 4rem 0 3rem;
+  height: 100vh;
+  padding: 6rem 0 3rem;
   background: var(--bg-color);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   transition: var(--transition);
   z-index: var(--z-fixed);
-}
-
-.dark-theme .nav__menu {
-  background: var(--bg-light);
+  overflow-y: auto;
+  backdrop-filter: blur(10px);
 }
 
 .nav__list {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2rem;
+  gap: 2.5rem;
 }
 
 .nav__link {
@@ -313,6 +229,8 @@ button {
   font-weight: var(--font-medium);
   transition: var(--transition);
   color: var(--text-color);
+  font-size: 1.1rem;
+  padding: 0.5rem 0;
 }
 
 .nav__link:hover,
@@ -326,11 +244,18 @@ button {
 
 .nav__close {
   position: absolute;
-  top: 1rem;
+  top: 1.5rem;
   right: 1.5rem;
   font-size: 1.5rem;
   color: var(--text-color);
   cursor: pointer;
+  transition: var(--transition);
+  z-index: var(--z-fixed);
+}
+
+.nav__close:hover {
+  color: var(--primary-color);
+  transform: rotate(90deg);
 }
 
 .nav__btns {
@@ -339,7 +264,6 @@ button {
   gap: 1rem;
 }
 
-.nav__toggle,
 .change-theme {
   font-size: 1.25rem;
   color: var(--text-color);
@@ -347,14 +271,49 @@ button {
   transition: var(--transition);
 }
 
-.nav__toggle:hover,
 .change-theme:hover {
   color: var(--primary-color);
 }
 
-/* Show menu */
-.show-menu {
+/* HAMBURGER MENU - SIMPLIFIED */
+.nav__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 0.5rem;
+  font-size: 1.25rem;
+  color: var(--text-color);
+  transition: var(--transition);
+}
+
+.nav__toggle:hover {
+  color: var(--primary-color);
+}
+
+/* Show menu when body has show-menu class */
+.show-menu .nav__menu {
   top: 0;
+}
+
+/* Prevent body scroll when menu open */
+.show-menu {
+  overflow: hidden;
+}
+
+/* Overlay for menu background */
+.show-menu::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: calc(var(--z-fixed) - 1);
+  opacity: 1;
+  visibility: visible;
+  transition: var(--transition);
 }
 
 /*==================== HERO ====================*/
@@ -662,7 +621,7 @@ button {
   border-radius: 50%;
   background: linear-gradient(135deg, var(--primary-color, #4e54c8), var(--accent-color, #8f94fb));
   color: #fff;
-  box-shadow: 0 4px 12px rgba(78,84,200,0.4);
+  box-shadow: 0 4px 12px rgba(78, 84, 200, 0.4);
   flex-shrink: 0;
 }
 
@@ -1424,7 +1383,7 @@ button {
   transition: var(--transition);
 }
 
-.scroll-top.show {
+.scroll-top.show-scroll {
   opacity: 1;
   visibility: visible;
 }
@@ -1432,6 +1391,93 @@ button {
 .scroll-top:hover {
   background: var(--primary-dark);
   transform: translateY(-5px);
+}
+
+/* Dark theme support */
+.dark-theme .scroll-top {
+  background: var(--primary-color);
+  box-shadow: 0 4px 12px rgba(99, 102, 241, 0.4);
+}
+
+.dark-theme .scroll-top:hover {
+  background: var(--primary-dark);
+}
+
+/* =================== LEGAL =============================*/
+.legal-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.legal-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding-top: 6rem;
+}
+
+.legal-content {
+  background: var(--card-bg);
+  backdrop-filter: blur(10px);
+  border-radius: var(--border-radius);
+  padding: 3rem;
+  box-shadow: var(--card-shadow);
+  border: 1px solid var(--card-border);
+}
+
+.legal-section {
+  margin-bottom: 2.5rem;
+}
+
+.legal-section h2 {
+  color: var(--primary-color);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.legal-section h3 {
+  color: var(--text-color);
+  margin: 1.5rem 0 0.5rem 0;
+  font-size: 1.2rem;
+}
+
+.legal-section p,
+.legal-section li {
+  color: var(--text-light);
+  line-height: 1.7;
+  margin-bottom: 1rem;
+}
+
+.legal-section ul {
+  padding-left: 1.5rem;
+}
+
+.legal-section li {
+  margin-bottom: 0.5rem;
+}
+
+.last-updated {
+  text-align: center;
+  color: var(--text-lighter);
+  font-style: italic;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--card-border);
+}
+
+.back-to-home {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--primary-color);
+  margin-bottom: 2rem;
+  font-weight: var(--font-medium);
+  transition: var(--transition);
+}
+
+.back-to-home:hover {
+  color: var(--primary-dark);
+  transform: translateX(-5px);
 }
 
 /*==================== MEDIA QUERIES ====================*/
@@ -1518,15 +1564,50 @@ button {
     background: transparent;
     box-shadow: none;
     width: auto;
+    height: auto;
+    overflow-y: visible;
+    backdrop-filter: none;
   }
 
   .nav__list {
     flex-direction: row;
-    gap: 2.5rem;
   }
 
-  .nav__toggle,
+  .nav__link {
+    font-size: 1rem;
+    padding: 0;
+    position: relative;
+  }
+
+  .nav__link::after {
+    content: "";
+    position: absolute;
+    bottom: -0.5rem;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--gradient-primary);
+    transition: var(--transition);
+  }
+
+  .nav__link:hover::after,
+  .nav__link.active-link::after {
+    width: 100%;
+  }
+
+  .nav__toggle {
+    display: none;
+  }
+
   .nav__close {
+    display: none;
+  }
+
+  .nav__icon {
+    display: none;
+  }
+
+  .show-menu::before {
     display: none;
   }
 
@@ -1597,6 +1678,18 @@ button {
 
   .portfolio__container {
     grid-template-columns: repeat(3, 1fr);
+  }
+
+  .legal-container {
+    padding: 1rem;
+  }
+
+  .legal-content {
+    padding: 2rem 1.5rem;
+  }
+
+  .legal-header {
+    padding-top: 4rem;
   }
 }
 
